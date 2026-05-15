@@ -1,48 +1,43 @@
-// hide welcome screen
-setTimeout(() => {
-  document.getElementById("welcome").style.display = "none";
-}, 3000);
-
-// CAREER FUNCTION
 function getCareer() {
   const interest = document.getElementById("interest").value;
+  const name = document.getElementById("name").value;
 
   fetch("https://echo-hackers-career-guidance1-1.onrender.com/career", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ interest })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      interest,
+      score: Math.floor(Math.random() * 100)
+    })
   })
   .then(res => res.json())
   .then(data => {
     document.getElementById("output").innerText =
-      "Career: " + data.career +
-      "\nSkills: " + data.skills.join(", ") +
-      "\nAdvice: " + data.advice;
+      `Hi ${name} 🎯
+Career: ${data.career}
+Score: ${data.score}%
+Skills: ${data.skills.join(", ")}
+Advice: ${data.advice}`;
 
-    // VOICE OUTPUT 🎤
-    let speech = new SpeechSynthesisUtterance();
-    speech.text = "Recommended career is " + data.career;
+    // voice output
+    let speech = new SpeechSynthesisUtterance(
+      "Your career is " + data.career
+    );
     window.speechSynthesis.speak(speech);
   });
 }
 
-// SIMPLE AI CHATBOT 🤖
+// simple chatbot
 function askAI() {
-  const q = document.getElementById("userInput").value.toLowerCase();
-  let answer = "";
+  const q = document.getElementById("chat").value.toLowerCase();
+  let ans = "";
 
-  if (q.includes("career")) {
-    answer = "Choose coding, design, or data based on interest.";
-  } else if (q.includes("job")) {
-    answer = "Build skills, projects, and practice interviews.";
-  } else {
-    answer = "Keep learning and stay consistent!";
-  }
+  if (q.includes("career")) ans = "Focus on skills and projects.";
+  else if (q.includes("job")) ans = "Practice coding and internships.";
+  else ans = "Keep learning and stay consistent.";
 
-  document.getElementById("output").innerText = "AI: " + answer;
+  document.getElementById("output").innerText = "AI: " + ans;
 
-  let speech = new SpeechSynthesisUtterance(answer);
+  let speech = new SpeechSynthesisUtterance(ans);
   window.speechSynthesis.speak(speech);
 }
