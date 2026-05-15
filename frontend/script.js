@@ -1,34 +1,25 @@
-// hide loader + voice greeting
+// Voice welcome 🎤
 window.onload = function () {
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-
-    let msg = new SpeechSynthesisUtterance();
-    msg.text = "Welcome to AI Career Guidance System";
-    window.speechSynthesis.speak(msg);
-
-  }, 2000);
+    let speech = new SpeechSynthesisUtterance("Welcome to Career AI Assistant");
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
 };
 
-// fetch backend
-function getCareer() {
-  const interest = document.getElementById("interest").value;
+function sendMessage() {
+    let input = document.getElementById("userInput").value;
+    let chatBox = document.getElementById("chatBox");
 
-  fetch("https://echo-hackers-career-guidance1-1.onrender.com/career", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ interest })
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("output").innerText =
-      "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
-  });
-}
+    chatBox.innerHTML += "<p><b>You:</b> " + input + "</p>";
 
-// dark mode
-function toggleDark() {
-  document.body.classList.toggle("dark");
+    fetch("http://localhost:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input })
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.innerHTML += "<p><b>AI:</b> " + data.reply + "</p>";
+    });
 }
