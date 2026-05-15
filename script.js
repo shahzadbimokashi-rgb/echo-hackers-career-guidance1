@@ -1,16 +1,9 @@
-// hide loader + voice greeting
-window.onload = function () {
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
+// hide welcome screen after 3 seconds
+setTimeout(() => {
+  document.getElementById("welcome").style.display = "none";
+}, 3000);
 
-    let msg = new SpeechSynthesisUtterance();
-    msg.text = "Welcome to AI Career Guidance System";
-    window.speechSynthesis.speak(msg);
-
-  }, 2000);
-};
-
-// fetch backend
+// API call
 function getCareer() {
   const interest = document.getElementById("interest").value;
 
@@ -26,9 +19,4 @@ function getCareer() {
     document.getElementById("output").innerText =
       "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
   });
-}
-
-// dark mode
-function toggleDark() {
-  document.body.classList.toggle("dark");
 }
