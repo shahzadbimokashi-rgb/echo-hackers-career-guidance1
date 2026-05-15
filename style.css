@@ -15,14 +15,14 @@ body {
 
 .card {
   background: white;
-  width: 350px;
-  margin: 80px auto;
+  width: 360px;
+  margin: 60px auto;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
 }
 
-select, button {
+select, button, input {
   width: 80%;
   padding: 10px;
   margin-top: 10px;
@@ -41,7 +41,7 @@ button:hover {
   background: #ee0979;
 }
 
-/* WELCOME ANIMATION */
+/* WELCOME SCREEN */
 .welcome-screen {
   position: fixed;
   width: 100%;
