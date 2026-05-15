@@ -1,52 +1,31 @@
-// CAREER FUNCTION
-function getCareer() {
-  const interest = document.getElementById("interest").value;
-  const name = document.getElementById("name").value;
-
-  document.getElementById("loader").classList.remove("hidden");
-  document.getElementById("output").innerText = "";
-
-  fetch("https://echo-hackers-career-guidance1-1.onrender.com/career", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ interest })
-  })
-  .then(res => res.json())
-  .then(data => {
+function login() {
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("cartoon").style.display = "block";
 
     setTimeout(() => {
-      document.getElementById("loader").classList.add("hidden");
-
-      document.getElementById("output").innerText =
-`Hi ${name} 🚀
-Career: ${data.career}
-Skills: ${data.skills.join(", ")}
-Advice: ${data.advice}`;
-
-      let speech = new SpeechSynthesisUtterance("Your career is " + data.career);
-      window.speechSynthesis.speak(speech);
-
-    }, 1500);
-  });
+        document.getElementById("cartoon").style.display = "none";
+        document.getElementById("app").style.display = "block";
+    }, 3000);
 }
 
-// CHATBOT
-function askAI() {
-  const q = document.getElementById("chat").value.toLowerCase();
+async function send() {
+    let msg = document.getElementById("msg").value;
 
-  let ans = "";
+    let chatBox = document.getElementById("chatBox");
 
-  if (q.includes("career")) ans = "Focus on skills + projects.";
-  else if (q.includes("job")) ans = "Build portfolio and practice interviews.";
-  else ans = "Keep learning consistently.";
+    chatBox.innerHTML += "<p><b>You:</b> " + msg + "</p>";
 
-  document.getElementById("output").innerText = "AI: " + ans;
+    let res = await fetch("http://localhost:5000/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: msg })
+    });
 
-  let speech = new SpeechSynthesisUtterance(ans);
-  window.speechSynthesis.speak(speech);
+    let data = await res.json();
+
+    chatBox.innerHTML += "<p><b>AI:</b> " + data.reply + "</p>";
+
+    document.getElementById("msg").value = "";
 }
-
-// REMOVE WELCOME SCREEN
-setTimeout(() => {
-  document.getElementById("welcomeScreen").style.display = "none";
-}, 4000);
