@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Career GOD MODE</title>
+  <title>AI Career System</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="card">
+<!-- CINEMATIC WELCOME SCREEN -->
+<div id="welcomeScreen">
+  <img src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif">
+  <h2>Welcome to AI Career System 🚀</h2>
+</div>
 
-  <h1>🚀 AI Career GOD MODE</h1>
+<!-- MAIN APP -->
+<div class="container">
 
-  <input id="name" placeholder="Enter your name"><br><br>
+  <h1 class="glow">🚀 AI Career Final Boss</h1>
+
+  <input id="name" placeholder="Enter your name">
 
   <select id="interest">
     <option value="coding">Coding</option>
@@ -19,16 +26,15 @@
     <option value="data">Data</option>
   </select>
 
-  <br><br>
-
   <button onclick="getCareer()">Get Career</button>
+
+  <div id="loader" class="hidden">🧠 AI Thinking...</div>
 
   <h2 id="output"></h2>
 
   <hr>
 
-  <h3>AI Chatbot 🤖</h3>
-  <input id="chat" placeholder="Ask something...">
+  <input id="chat" placeholder="Ask AI...">
   <button onclick="askAI()">Ask</button>
 
 </div>
