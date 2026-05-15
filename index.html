@@ -7,18 +7,34 @@
 
   <h1>AI Career Guidance System</h1>
 
-  <button onclick="getData()">Get Career Info</button>
+  <p>Select your interest:</p>
+
+  <select id="interest">
+    <option value="coding">Coding</option>
+    <option value="design">Design</option>
+    <option value="data">Data</option>
+  </select>
+
+  <button onclick="getCareer()">Get Career</button>
 
   <h2 id="output"></h2>
 
   <script>
-    function getData() {
-      fetch("https://echo-hackers-career-guidance1-1.onrender.com/career")
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("output").innerText =
-            "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
-        });
+    function getCareer() {
+      const interest = document.getElementById("interest").value;
+
+      fetch("https://echo-hackers-career-guidance1-1.onrender.com/career", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ interest })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("output").innerText =
+          "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
+      });
     }
   </script>
 
