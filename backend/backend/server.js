@@ -6,11 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Home route
 app.get("/", (req, res) => {
   res.send("Career Guidance Backend Running 🚀");
 });
 
-// NEW SMART API
+// Career API
 app.post("/career", (req, res) => {
   const interest = req.body.interest;
 
@@ -29,11 +30,11 @@ app.post("/career", (req, res) => {
   } else if (interest === "data") {
     response = {
       career: "Data Analyst",
-      skills: ["Python", "Excel", "SQL"]
+      skills: ["Python", "SQL", "Excel"]
     };
   } else {
     response = {
-      career: "Explore More Fields",
+      career: "Explorer",
       skills: ["Communication", "Problem Solving"]
     };
   }
