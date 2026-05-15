@@ -1,8 +1,26 @@
-function getData() {
-  fetch("https://echo-hackers-career-guidance1-1.onrender.com/career")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("output").innerText =
-        "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
-    });
-}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Career Guidance System</title>
+</head>
+<body>
+
+  <h1>AI Career Guidance System</h1>
+
+  <button onclick="getData()">Get Career Info</button>
+
+  <h2 id="output"></h2>
+
+  <script>
+    function getData() {
+      fetch("https://echo-hackers-career-guidance1-1.onrender.com/career")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("output").innerText =
+            "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
+        });
+    }
+  </script>
+
+</body>
+</html>
