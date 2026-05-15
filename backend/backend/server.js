@@ -7,36 +7,41 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Career Guidance Backend Running 🚀");
+  res.send("AI Career GOD MODE Backend Running 🚀");
 });
 
-// CAREER API
+// CAREER ENGINE
 app.post("/career", (req, res) => {
-  const interest = req.body.interest;
+  const { interest, score } = req.body;
 
-  let data;
+  let data = {};
 
   if (interest === "coding") {
     data = {
       career: "Software Developer",
       skills: ["HTML", "CSS", "JavaScript", "React"],
-      advice: "Practice coding daily and build projects."
+      advice: "Build projects and practice daily coding."
     };
   } else if (interest === "design") {
     data = {
       career: "UI/UX Designer",
       skills: ["Figma", "Creativity", "UI Design"],
-      advice: "Design apps and improve user experience."
+      advice: "Focus on design thinking and UI practice."
     };
   } else {
     data = {
       career: "Explorer",
       skills: ["Communication", "Problem Solving"],
-      advice: "Explore multiple fields and choose your passion."
+      advice: "Explore multiple fields before deciding."
     };
   }
 
-  res.json(data);
+  const finalScore = score || Math.floor(Math.random() * 40 + 60);
+
+  res.json({
+    ...data,
+    score: finalScore
+  });
 });
 
 const PORT = process.env.PORT || 5000;
