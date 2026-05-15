@@ -7,40 +7,25 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("🚀 Career AI Backend Running");
+  res.send("Backend Working 🚀");
 });
 
-// CAREER API
 app.post("/career", (req, res) => {
   const { interest } = req.body;
 
-  let data = {};
-
   if (interest === "coding") {
-    data = {
+    res.json({
       career: "Software Developer",
-      skills: ["HTML", "CSS", "JavaScript", "React"],
-      advice: "Build projects daily and practice coding."
-    };
-  } else if (interest === "design") {
-    data = {
-      career: "UI/UX Designer",
-      skills: ["Figma", "Creativity", "UI Design"],
-      advice: "Improve design thinking and UI skills."
-    };
+      skills: ["HTML", "CSS", "JS"]
+    });
   } else {
-    data = {
+    res.json({
       career: "Explorer",
-      skills: ["Communication", "Problem Solving"],
-      advice: "Explore different fields before choosing."
-    };
+      skills: ["Thinking", "Learning"]
+    });
   }
-
-  res.json(data);
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+app.listen(5000, () => {
+  console.log("Server running");
 });
