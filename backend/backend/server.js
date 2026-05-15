@@ -6,16 +6,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Home route
 app.get("/", (req, res) => {
   res.send("Career Guidance Backend Running 🚀");
 });
 
-// Career API
 app.post("/career", (req, res) => {
   const interest = req.body.interest;
 
-  let response = {};
+  let response;
 
   if (interest === "coding") {
     response = {
@@ -46,4 +44,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
-});
+});  
