@@ -5,31 +5,32 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Simple AI logic (multi-step career guidance)
-app.post("/chat", (req, res) => {
-    const msg = req.body.message.toLowerCase();
+// Simple AI logic (career guidance chatbot)
+function getAIResponse(message) {
+    message = message.toLowerCase();
 
-    let reply = "";
-
-    if (msg.includes("confused")) {
-        reply = "Tell me your interest: coding, design, business, or medical?";
-    } 
-    else if (msg.includes("coding")) {
-        reply = "Great! Learn HTML → CSS → JavaScript → React → Build Projects.";
-    } 
-    else if (msg.includes("design")) {
-        reply = "Learn UI/UX, Figma, Canva, and start design projects.";
-    } 
-    else if (msg.includes("business")) {
-        reply = "Learn marketing, finance basics, and startup strategy.";
-    } 
-    else if (msg.includes("medical")) {
-        reply = "Focus on biology, NEET prep, and clinical practice.";
-    } 
-    else {
-        reply = "Tell me your interest so I can guide your career step-by-step.";
+    if (message.includes("python")) {
+        return "Python is great for AI, ML, Web Development. Start with basics, then projects.";
     }
 
+    if (message.includes("java")) {
+        return "Java is strong for backend, Android apps, and enterprise systems.";
+    }
+
+    if (message.includes("career")) {
+        return "You can choose: Software Developer, AI Engineer, Data Analyst, Cyber Security.";
+    }
+
+    if (message.includes("hello")) {
+        return "Hello! I am your Career AI Assistant 😊 Ask me anything.";
+    }
+
+    return "I am your Career AI Assistant. Ask about coding, careers, or skills.";
+}
+
+app.post("/chat", (req, res) => {
+    const userMessage = req.body.message;
+    const reply = getAIResponse(userMessage);
     res.json({ reply });
 });
 
