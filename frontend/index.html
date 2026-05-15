@@ -2,68 +2,21 @@
 <html>
 <head>
   <title>AI Career Guidance System</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      background: linear-gradient(to right, #ff6a00, #ee0979);
-      text-align: center;
-    }
-
-    .card {
-      background: white;
-      width: 350px;
-      margin: 80px auto;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    select, button {
-      width: 80%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background: #ff6a00;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #ee0979;
-    }
-
-    #output {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #222;
-    }
-
-    #welcome {
-      margin-top: 80px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- WELCOME CARTOON -->
+<!-- Loader -->
+<div id="loader">Loading AI Career System...</div>
+
+<!-- Welcome -->
 <div id="welcome">
-  <img src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif" width="200">
-  <h2 style="color:white;">Welcome to AI Career Guidance 👋</h2>
+  <img src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif" width="180">
+  <h2>Welcome to AI Career Guidance 👋</h2>
 </div>
 
-<!-- MAIN CARD -->
+<!-- Main Card -->
 <div class="card">
   <h1>AI Career Guidance System</h1>
 
@@ -75,37 +28,15 @@
     <option value="data">Data</option>
   </select>
 
-  <br>
+  <br><br>
 
   <button onclick="getCareer()">Get Career</button>
+  <button onclick="toggleDark()">Dark Mode</button>
 
   <h2 id="output"></h2>
 </div>
 
-<script>
-  // Hide welcome after 3 seconds
-  setTimeout(() => {
-    document.getElementById("welcome").style.display = "none";
-  }, 3000);
-
-  // Fetch backend
-  function getCareer() {
-    const interest = document.getElementById("interest").value;
-
-    fetch("https://echo-hackers-career-guidance1-1.onrender.com/career", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ interest })
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("output").innerText =
-        "Career: " + data.career + "\nSkills: " + data.skills.join(", ");
-    });
-  }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
