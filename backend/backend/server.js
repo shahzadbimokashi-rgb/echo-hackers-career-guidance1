@@ -1,47 +1,38 @@
-const express = require("express");
-const cors = require("cors");
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Career Guidance System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-const app = express();
+<body>
 
-app.use(cors());
-app.use(express.json());
+<!-- WELCOME SCREEN -->
+<div id="welcome" class="welcome-screen">
+  <img src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif">
+  <h2>Welcome to AI Career Guidance 👋</h2>
+</div>
 
-app.get("/", (req, res) => {
-  res.send("Career Guidance Backend Running 🚀");
-});
+<!-- MAIN UI -->
+<div class="card">
+  <h1>AI Career Guidance System</h1>
 
-app.post("/career", (req, res) => {
-  const interest = req.body.interest;
+  <p>Select your interest:</p>
 
-  let response;
+  <select id="interest">
+    <option value="coding">Coding</option>
+    <option value="design">Design</option>
+    <option value="data">Data</option>
+  </select>
 
-  if (interest === "coding") {
-    response = {
-      career: "Software Developer",
-      skills: ["HTML", "CSS", "JavaScript", "React"]
-    };
-  } else if (interest === "design") {
-    response = {
-      career: "UI/UX Designer",
-      skills: ["Figma", "Creativity", "Prototyping"]
-    };
-  } else if (interest === "data") {
-    response = {
-      career: "Data Analyst",
-      skills: ["Python", "SQL", "Excel"]
-    };
-  } else {
-    response = {
-      career: "Explorer",
-      skills: ["Communication", "Problem Solving"]
-    };
-  }
+  <br><br>
 
-  res.json(response);
-});
+  <button onclick="getCareer()">Get Career</button>
 
-const PORT = process.env.PORT || 5000;
+  <h2 id="output"></h2>
+</div>
 
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
+<script src="script.js"></script>
+
+</body>
+</html>
